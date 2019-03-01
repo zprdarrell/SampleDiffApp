@@ -1,7 +1,9 @@
-package com.darrellgriffin.gitdiffapp;
+package com.darrellgriffin.gitdiffapp.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.darrellgriffin.gitdiffapp.R;
 
 public class MainActivity extends AppCompatActivity {
 
