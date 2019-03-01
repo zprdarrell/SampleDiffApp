@@ -1,4 +1,6 @@
 package com.darrellgriffin.gitdiffapp.viewmodel;
 
-public class PullViewModel {
+import androidx.lifecycle.ViewModel;
+
+public class PullViewModel extends ViewModel {
 }
