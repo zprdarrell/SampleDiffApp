@@ -13,9 +13,11 @@ import javax.inject.Provider;
 
 import androidx.lifecycle.ViewModel;
 import dagger.MapKey;
+import dagger.Module;
 import dagger.Provides;
 import dagger.multibindings.IntoMap;
 
+@Module
 public class ViewModelModule {
 
     @Target(ElementType.METHOD)
@@ -25,7 +27,7 @@ public class ViewModelModule {
         Class<? extends ViewModel> value();
     }
     @Provides
-    PullViewModelFactory pullViewModelFactory(Map<Class<? extends ViewModel>, Provider<ViewModel>> providerMap){
+    PullViewModelFactory PullViewModelFactory(Map<Class<? extends ViewModel>, Provider<ViewModel>> providerMap){
         return new PullViewModelFactory(providerMap);
     }
     @Provides
