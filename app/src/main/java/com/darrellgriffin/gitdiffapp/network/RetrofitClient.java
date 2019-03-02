@@ -56,8 +56,8 @@ public class RetrofitClient {
                     }
                 });
     }
-    public void getDiffFile(String owner, String projectname, String id){
-        getRetrofit(BASE_DIFF_URL).create(RESTService.class).getDiffFile(owner, projectname, id)
+    public void getDiffFile(String url){
+        getRetrofit(BASE_DIFF_URL).create(RESTService.class).getDiffFile(url)
                 .enqueue(new Callback<String>() {
                     @Override
                     public void onResponse(Call<String> call, Response<String> response) {

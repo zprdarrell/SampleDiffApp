@@ -30,6 +30,7 @@ public class PullRequestFragment extends Fragment {
                              Bundle savedInstanceState) {
         binding = DataBindingUtil
                 .inflate(inflater, R.layout.fragment_pull_request, container, false);
+
         return binding.getRoot();
     }
 

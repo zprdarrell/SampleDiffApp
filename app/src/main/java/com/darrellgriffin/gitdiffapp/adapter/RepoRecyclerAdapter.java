@@ -43,7 +43,7 @@ public class RepoRecyclerAdapter extends RecyclerView.Adapter<RepoRecyclerAdapte
 
     @Override
     public void onBindViewHolder(@NonNull RepoViewHolder holder, int position) {
-
+        holder.bind(pullRequestList.get(position));
     }
 
     @Override
@@ -68,7 +68,9 @@ public class RepoRecyclerAdapter extends RecyclerView.Adapter<RepoRecyclerAdapte
         }
         void bind(PullRequest request){
             this.pullRequest = request;
-            //TODO: Bind views
+            binding.itemTitle.setText(request.getTitle());
+            binding.itemDescription.setText(request.getBody());
+            binding.itemNumber.setText(request.getNumber());
         }
     }
 }

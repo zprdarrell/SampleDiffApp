@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.RecyclerView;
 public class RepoBindingAdapter {
 
 
-    @BindingAdapter("setRepoText")
-    public static void setRepoTitle(TextView view, String title){
+    @BindingAdapter("setText")
+    public static void setText(TextView view, String title){
         view.setText(title);
     }
 
@@ -20,4 +20,5 @@ public class RepoBindingAdapter {
         recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
         recyclerView.setAdapter(adapter);
     }
+
 }

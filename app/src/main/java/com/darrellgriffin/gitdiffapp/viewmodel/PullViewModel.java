@@ -15,8 +15,8 @@ public class PullViewModel extends ViewModel implements RetrofitClient.DataCallb
     public LiveData<RequestList> getPullList() {
         return pullList;
     }
-
     private final MutableLiveData<RequestList> pullList = new MutableLiveData<>();
+
     @Inject
     public PullViewModel(){
         client = RetrofitClient.getInstance();
@@ -41,7 +41,7 @@ public class PullViewModel extends ViewModel implements RetrofitClient.DataCallb
     public void fetchRepoData(String owner, String projectName){
         client.getPullRequests(owner, projectName);
     }
-    public void fetchDiffFile(String owner, String projectName, String id){
-        client.getDiffFile(owner, projectName, id);
+    public void fetchDiffFile(String url){
+        client.getDiffFile(url);
     }
 }
