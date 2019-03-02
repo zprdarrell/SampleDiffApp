@@ -3,7 +3,7 @@
     <data>
         <variable
             name="selectedRepo"
-            type="com.darrellgriffin.gitdiffapp.model.RepoRequests"/>
+            type="com.darrellgriffin.gitdiffapp.model.RequestList"/>
     </data>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
