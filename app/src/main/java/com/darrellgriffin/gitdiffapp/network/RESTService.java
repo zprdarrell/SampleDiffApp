@@ -12,5 +12,5 @@ public interface RESTService {
                                        @Path("project")String projectName);
 
     @GET()
-    Call<String> getDiffFile(@Url String url);
+    Call<ResponseBody> getDiffFile(@Url String url);
 }

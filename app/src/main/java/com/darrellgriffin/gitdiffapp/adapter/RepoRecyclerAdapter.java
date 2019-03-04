@@ -30,7 +30,7 @@ public class RepoRecyclerAdapter extends RecyclerView.Adapter<RepoRecyclerAdapte
                 notifyDataSetChanged();
             }
         });
-        setHasStableIds(true);
+        setHasStableIds(false);
 
     }
     @NonNull

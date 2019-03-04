@@ -5,8 +5,11 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
+import timber.log.Timber;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.view.View;
 
 import com.darrellgriffin.gitdiffapp.DiffApp;
 import com.darrellgriffin.gitdiffapp.R;
@@ -41,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements RepoRecyclerAdapt
 
     private void initViews(){
         viewModel = ViewModelProviders.of(this, factory).get(PullViewModel.class);
+        viewModel.loading.observe(this, this::toggleLoadingView);
         viewModel.fetchRepoData(Constants.DEFAULT_REPO_OWNER, Constants.DEFAULT_PROJECT_NAME);
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.add(binding.fragmentContainer.getId(), new PullRequestFragment());
@@ -48,12 +52,18 @@ public class MainActivity extends AppCompatActivity implements RepoRecyclerAdapt
         fragmentTransaction.commit();
     }
 
+    private void toggleLoadingView(boolean show){
+        binding.loadingView.setVisibility(show ? View.VISIBLE : View.GONE);
+    }
+
 
     @Override
     public void onPullSelected(PullRequest request) {
+        Timber.d("onPullSelcted %s", request);
         viewModel.fetchDiffFile(request.getDiffUrl());
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(binding.fragmentContainer.getId(), new DiffFragment());
+        fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
 }

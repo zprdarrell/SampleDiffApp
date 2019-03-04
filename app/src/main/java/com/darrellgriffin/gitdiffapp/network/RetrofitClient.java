@@ -45,11 +45,14 @@ public class RetrofitClient {
     }
 
     private Retrofit getRetrofit(String baseUrl){
-        Moshi moshi = new Moshi.Builder().build();
+        Moshi moshi = new Moshi.Builder()
+                .build();
+
         return new Retrofit
                 .Builder()
                 .baseUrl(baseUrl)
-                .addConverterFactory(MoshiConverterFactory.create(moshi))
+                .addConverterFactory(MoshiConverterFactory.create(moshi).asLenient())
+                .validateEagerly(true)
                 .build();
     }
     public void getPullRequests(String owner, String projectName){
@@ -87,14 +90,19 @@ public class RetrofitClient {
     }
     public void getDiffFile(String url){
         getRetrofit(BASE_DIFF_URL).create(RESTService.class).getDiffFile(url)
-                .enqueue(new Callback<String>() {
+                .enqueue(new Callback<ResponseBody>() {
                     @Override
-                    public void onResponse(Call<String> call, Response<String> response) {
-                        listener.onDiffResponse(response.body());
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        Timber.d("onResponse %s", response);
+                        try {
+                            listener.onDiffResponse(response.body().string());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
 
                     @Override
-                    public void onFailure(Call<String> call, Throwable t) {
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
                         t.printStackTrace();
                     }
                 });

@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.darrellgriffin.gitdiffapp.R;
+import com.darrellgriffin.gitdiffapp.activity.MainActivity;
 import com.darrellgriffin.gitdiffapp.adapter.RepoBindingAdapter;
 import com.darrellgriffin.gitdiffapp.adapter.RepoRecyclerAdapter;
 import com.darrellgriffin.gitdiffapp.databinding.FragmentPullRequestBinding;
@@ -25,7 +26,7 @@ import javax.inject.Inject;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class PullRequestFragment extends Fragment implements RepoRecyclerAdapter.PullRequestSelectedListener{
+public class PullRequestFragment extends Fragment{
 
     private PullViewModel viewModel;
     FragmentPullRequestBinding binding;
@@ -45,11 +46,9 @@ public class PullRequestFragment extends Fragment implements RepoRecyclerAdapter
         binding = DataBindingUtil
                 .inflate(inflater, R.layout.fragment_pull_request, container, false);
         viewModel = ViewModelProviders.of(getActivity(), factory).get(PullViewModel.class);
-        RepoBindingAdapter.setAdapter(binding.prRecyclerView, new RepoRecyclerAdapter(viewModel, getActivity(), this));
+        RepoBindingAdapter.setAdapter(binding.prRecyclerView, new RepoRecyclerAdapter(viewModel, getActivity(), (MainActivity)getActivity()));
         return binding.getRoot();
     }
 
-    @Override
-    public void onPullSelected(PullRequest request) {
-    }
+
 }
