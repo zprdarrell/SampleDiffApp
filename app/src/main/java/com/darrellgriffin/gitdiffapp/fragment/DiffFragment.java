@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import timber.log.Timber;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,10 +28,12 @@ public class DiffFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
+        Timber.d("DiffFragment created");
         // Inflate the layout for this fragment
         binding = DataBindingUtil
                 .inflate(inflater, R.layout.fragment_diff, container, false);
+        binding.leftDiffView.setLeftSide(true);
+        binding.rightDiffView.setLeftSide(false);
         return binding.getRoot();
     }
 

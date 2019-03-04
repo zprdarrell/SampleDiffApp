@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
             name="selectedRepo"
             type="com.darrellgriffin.gitdiffapp.model.RequestList"/>
 
-        <variable
-            name="recyclerAdapter"
-            type="com.darrellgriffin.gitdiffapp.adapter.RepoRecyclerAdapter"/>
     </data>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -18,8 +15,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/pr_recyclerView"
-        setAdapter="@{recyclerAdapter}"/>
+        android:id="@+id/pr_recyclerView" />
 
 </FrameLayout>
 </layout>

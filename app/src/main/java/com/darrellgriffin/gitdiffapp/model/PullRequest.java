@@ -11,6 +11,16 @@ public class PullRequest {
     @Json(name = "body") private String body;
 
 
+
+    public PullRequest(String url, int id, String diffUrl, int number, String title, String body){
+        this.url = url;
+        this.id = id;
+        this.diffUrl = diffUrl;
+        this.number = number;
+        this.title = title;
+        this.body = body;
+
+    }
     public String getUrl() {
         return url;
     }
@@ -33,5 +43,12 @@ public class PullRequest {
 
     public String getBody() {
         return body;
+    }
+    public String toString(){
+        return String.valueOf(url) + ", "
+                + String.valueOf(id)+ ", "
+                + String.valueOf(diffUrl) + ", "
+                + String.valueOf(number) + ", "
+                + String.valueOf(title) + ", " + String.valueOf(body);
     }
 }

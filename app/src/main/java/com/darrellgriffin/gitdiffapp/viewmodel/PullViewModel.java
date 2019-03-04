@@ -1,21 +1,24 @@
 package com.darrellgriffin.gitdiffapp.viewmodel;
 
-import com.darrellgriffin.gitdiffapp.model.RequestList;
+import com.darrellgriffin.gitdiffapp.model.PullRequest;
 import com.darrellgriffin.gitdiffapp.network.RetrofitClient;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+import timber.log.Timber;
 
 public class PullViewModel extends ViewModel implements RetrofitClient.DataCallback{
     private RetrofitClient client;
 
-    public LiveData<RequestList> getPullList() {
+    public LiveData<List<PullRequest>> getPullList() {
         return pullList;
     }
-    private final MutableLiveData<RequestList> pullList = new MutableLiveData<>();
+    private final MutableLiveData<List<PullRequest>> pullList = new MutableLiveData<>();
 
     @Inject
     public PullViewModel(){
@@ -25,11 +28,13 @@ public class PullViewModel extends ViewModel implements RetrofitClient.DataCallb
 
     @Override
     public void onDiffResponse(String diff) {
+        Timber.d("Posting diff response.");
 
     }
 
     @Override
-    public void onRepoListResponse(RequestList requestList) {
+    public void onRepoListResponse(List<PullRequest> requestList) {
+        Timber.d("Posting values from request %s");
         pullList.postValue(requestList);
     }
     @Override

@@ -12,11 +12,11 @@
     android:layout_height="@dimen/recycler_item_height">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:id="@+id/item_number"
-        app:setText="@{selectedPull.number}"
         android:gravity="center"
+        app:setInt="@{selectedPull.number}"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -24,17 +24,17 @@
         app:layout_constraintHorizontal_chainStyle="spread_inside"
         />
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:id="@+id/item_title"
-        app:setText="@{selectedPull.title}"
         android:gravity="center"
+        app:setText="@{selectedPull.title}"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/item_number"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/item_description"/>
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:id="@+id/item_description"
         app:setText="@{selectedPull.body}"
@@ -43,5 +43,13 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/item_title"
         app:layout_constraintEnd_toEndOf="parent"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/diffBlue"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/item_description"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

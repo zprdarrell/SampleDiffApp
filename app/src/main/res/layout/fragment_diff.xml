@@ -1,20 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
             name="selectedRequest"
             type="com.darrellgriffin.gitdiffapp.model.PullRequest"/>
+
+        <variable
+            name="diffFile"
+            type="String"/>
     </data>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/diffRed"
     tools:context=".fragment.DiffFragment">
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        app:setText="@{selectedRequest.title}"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/description_tv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/title_tv"/>
 
-</FrameLayout>
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:gravity="center"
+        app:setText="@{selectedRequest.body}"
+        app:layout_constraintTop_toBottomOf="@id/title_tv"
+        app:layout_constraintBottom_toTopOf="@id/left_diffView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/description_tv"/>
+
+    <com.darrellgriffin.gitdiffapp.view.DiffTextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/left_diffView"
+        app:layout_constraintTop_toBottomOf="@id/description_tv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/right_diffView"
+        app:setDiffText="@{diffFile}"/>
+    <com.darrellgriffin.gitdiffapp.view.DiffTextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="@id/left_diffView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/left_diffView"
+        app:setDiffText="@{diffFile}"
+        android:id="@+id/right_diffView"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -26,7 +26,7 @@ public class RepoRecyclerAdapter extends RecyclerView.Adapter<RepoRecyclerAdapte
         viewModel.getPullList().observe(owner, pullList -> {
             pullRequestList.clear();
             if(pullList != null){
-                pullRequestList.addAll(pullList.getPullRequestList());
+                pullRequestList.addAll(pullList);
                 notifyDataSetChanged();
             }
         });
@@ -68,9 +68,7 @@ public class RepoRecyclerAdapter extends RecyclerView.Adapter<RepoRecyclerAdapte
         }
         void bind(PullRequest request){
             this.pullRequest = request;
-            binding.itemTitle.setText(request.getTitle());
-            binding.itemDescription.setText(request.getBody());
-            binding.itemNumber.setText(request.getNumber());
+            binding.setSelectedPull(request);
         }
     }
 }
