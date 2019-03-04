@@ -59,6 +59,7 @@ public class PullViewModel extends ViewModel implements RetrofitClient.DataCallb
         client.getPullRequests(owner, projectName);
     }
     public void fetchDiffFile(String url){
+        diffFile.postValue("");
         sendNotice(true);
         client.getDiffFile(url);
     }

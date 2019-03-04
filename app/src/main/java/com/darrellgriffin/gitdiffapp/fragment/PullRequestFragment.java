@@ -1,6 +1,7 @@
 package com.darrellgriffin.gitdiffapp.fragment;
 
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.databinding.DataBindingUtil;
@@ -18,8 +19,11 @@ import com.darrellgriffin.gitdiffapp.adapter.RepoBindingAdapter;
 import com.darrellgriffin.gitdiffapp.adapter.RepoRecyclerAdapter;
 import com.darrellgriffin.gitdiffapp.databinding.FragmentPullRequestBinding;
 import com.darrellgriffin.gitdiffapp.model.PullRequest;
+import com.darrellgriffin.gitdiffapp.util.Constants;
 import com.darrellgriffin.gitdiffapp.viewmodel.PullViewModel;
 import com.darrellgriffin.gitdiffapp.viewmodel.PullViewModelFactory;
+
+import java.util.Objects;
 
 import javax.inject.Inject;
 
@@ -48,6 +52,13 @@ public class PullRequestFragment extends Fragment{
         viewModel = ViewModelProviders.of(getActivity(), factory).get(PullViewModel.class);
         RepoBindingAdapter.setAdapter(binding.prRecyclerView, new RepoRecyclerAdapter(viewModel, getActivity(), (MainActivity)getActivity()));
         return binding.getRoot();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        viewModel.fetchRepoData(Constants.DEFAULT_REPO_OWNER, Constants.DEFAULT_PROJECT_NAME );
+        ((MainActivity) Objects.requireNonNull(getActivity())).binding.activityHeaderTV.setText(R.string.activity_header);
     }
 
 

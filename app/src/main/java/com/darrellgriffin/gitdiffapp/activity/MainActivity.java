@@ -26,7 +26,7 @@ import com.darrellgriffin.gitdiffapp.viewmodel.PullViewModelFactory;
 import javax.inject.Inject;
 
 public class MainActivity extends AppCompatActivity implements RepoRecyclerAdapter.PullRequestSelectedListener{
-    private ActivityMainBinding binding;
+    public ActivityMainBinding binding;
     private PullViewModel viewModel;
 
     @Inject
@@ -45,7 +45,6 @@ public class MainActivity extends AppCompatActivity implements RepoRecyclerAdapt
     private void initViews(){
         viewModel = ViewModelProviders.of(this, factory).get(PullViewModel.class);
         viewModel.loading.observe(this, this::toggleLoadingView);
-        viewModel.fetchRepoData(Constants.DEFAULT_REPO_OWNER, Constants.DEFAULT_PROJECT_NAME);
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.add(binding.fragmentContainer.getId(), new PullRequestFragment());
         fragmentTransaction.addToBackStack(null);
@@ -60,6 +59,8 @@ public class MainActivity extends AppCompatActivity implements RepoRecyclerAdapt
     @Override
     public void onPullSelected(PullRequest request) {
         Timber.d("onPullSelcted %s", request);
+        String diffHeader = "Diff for Pull Request " + String.valueOf(request.getNumber());
+        binding.activityHeaderTV.setText(diffHeader);
         viewModel.fetchDiffFile(request.getDiffUrl());
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(binding.fragmentContainer.getId(), new DiffFragment());
